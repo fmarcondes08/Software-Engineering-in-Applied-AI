@@ -1,0 +1,25 @@
+{
+  "name": "neural-networks",
+  "version": "1.0.0",
+  "description": "Postgraduate exercise in software engineering in applied AI: neural networks",
+  "main": "index.js",
+  "types": "module",
+  "scripts": {
+    "start": "node --no-warnings --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmarcondes08/Neural-Networks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fmarcondes08/Neural-Networks/issues"
+  },
+  "homepage": "https://github.com/fmarcondes08/Neural-Networks#readme",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "4.22"
+  }
+}
