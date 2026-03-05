@@ -16,18 +16,26 @@ Postgraduate program in Software Engineering in Applied AI offered by UNIPDS.
 
 ```
 Software-Engineering-in-Applied-AI/
-├── discipline-01-AI-Fundamentals-and-LLMs-for-Developers/
+└── discipline-01-AI-Fundamentals-and-LLMs-for-Developers/
+    └── module-02/
+        ├── Neural-Networks/                              # Node.js multi-class classifier
+        └── Detect-sign-language-with-Teachablemachine/  # React + TF.js sign language app
 ```
 
 ## Module Index
 
-| Module | Description | Status |
-|--------|-------------|--------|
-| [01 - AI Fundamentals and LLMs for Developers](./discipline-01-AI-Fundamentals-and-LLMs-for-Developers/)
+| Module | Project | Description | Status |
+|--------|---------|-------------|--------|
+| Discipline 01 — Module 02 | [Neural Networks](./discipline-01-AI-Fundamentals-and-LLMs-for-Developers/module-02/Neural-Networks/) | Node.js sequential neural network — multi-class customer tier classification | ✅ Done |
+| Discipline 01 — Module 02 | [Detect Sign Language with Teachable Machine](./discipline-01-AI-Fundamentals-and-LLMs-for-Developers/module-02/Detect-sign-language-with-Teachablemachine/) | Next.js + TensorFlow.js app — ASL hand sign classifier via image upload, random quiz, or webcam | ✅ Done |
 
 ## Technologies Used
 
 - **Machine Learning:** TensorFlow, TensorFlow.js, Teachable Machine
+- **Frontend:** Next.js 16, React 19, TypeScript
+- **Styling:** Tailwind CSS v4
+- **Computer Vision:** Image Classification, Sign Language Recognition
+- **Runtime:** Node.js (CLI exercises), Browser (React apps)
 
 ## How to Run the Projects
 
