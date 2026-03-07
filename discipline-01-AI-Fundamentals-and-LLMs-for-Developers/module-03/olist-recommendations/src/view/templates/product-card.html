@@ -1,0 +1,24 @@
+<div class="col-md-6 col-lg-4">
+  <div class="card product-card h-100">
+    <div class="card-body d-flex flex-column">
+      <span class="category-badge {{catClass}}">{{category}}</span>
+      <h5 class="card-title" title="{{name}}">{{name}}</h5>
+      <p class="card-text small text-muted mb-2">
+        <strong>Price:</strong> {{price}}<br />
+        <strong>Weight:</strong> {{weightClass}}
+      </p>
+      <div class="score-bar mt-auto mb-2">
+        <span class="score-badge hybrid" title="Hybrid score">⚡ {{hybridPct}}%</span>
+        <span class="score-badge cf" title="Collaborative filtering score">👥 {{cfPct}}%</span>
+        <span class="score-badge cb" title="Content-based score">🏷 {{cbPct}}%</span>
+      </div>
+      <button
+        class="btn btn-primary btn-sm wishlist-btn"
+        data-product='{{product}}'
+        disabled
+      >
+        <i class="bi bi-heart"></i> Add to Wishlist
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+/* ── Layout ────────────────────────────────────────────────────────────────── */
+
+body {
+  background: #f8f9fa;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.container-fluid {
+  max-width: 1600px;
+}
+
+/* ── Product cards ──────────────────────────────────────────────────────────── */
+
+.product-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  transition: box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-card .card-body {
+  padding: 0.75rem;
+}
+
+.product-card .card-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product-card .card-subtitle {
+  font-size: 0.75rem;
+}
+
+/* ── Score badges ───────────────────────────────────────────────────────────── */
+
+.score-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.score-badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.score-badge.hybrid {
+  background: #0d6efd;
+  color: white;
+}
+
+.score-badge.cf {
+  background: #198754;
+  color: white;
+}
+
+.score-badge.cb {
+  background: #fd7e14;
+  color: white;
+}
+
+/* ── Category badge colours ─────────────────────────────────────────────────── */
+
+.category-badge {
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  border-radius: 10px;
+  text-transform: capitalize;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.cat-electronics        { background: #cff4fc; color: #055160; }
+.cat-fashion_accessories { background: #f8d7da; color: #58151c; }
+.cat-home_appliances    { background: #d1ecf1; color: #0c5460; }
+.cat-sports_leisure     { background: #d4edda; color: #155724; }
+.cat-computers_accessories { background: #e2d9f3; color: #432874; }
+.cat-furniture_decor    { background: #fff3cd; color: #664d03; }
+.cat-baby               { background: #fce4ec; color: #880e4f; }
+.cat-toys               { background: #ffe0b2; color: #e65100; }
+.cat-beauty_health      { background: #f8bbd0; color: #880e4f; }
+.cat-health_beauty      { background: #f8bbd0; color: #880e4f; }
+.cat-auto               { background: #cfd8dc; color: #263238; }
+.cat-food_drink         { background: #dcedc8; color: #33691e; }
+.cat-books_technical    { background: #e8eaf6; color: #1a237e; }
+.cat-music              { background: #f3e5f5; color: #4a148c; }
+.cat-other              { background: #e9ecef; color: #495057; }
+
+/* ── Mode indicator alert ───────────────────────────────────────────────────── */
+
+#modeIndicator.cb-only  { background: #cff4fc; border-color: #9eeaf9; color: #055160; }
+#modeIndicator.hybrid   { background: #d1ecf1; border-color: #bee5eb; color: #0c5460; }
+
+/* ── Wishlist list ──────────────────────────────────────────────────────────── */
+
+#pastPurchasesList li {
+  padding: 2px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.75rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ── Wishlist button animation ──────────────────────────────────────────────── */
+
+.wishlist-btn.added {
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+}
