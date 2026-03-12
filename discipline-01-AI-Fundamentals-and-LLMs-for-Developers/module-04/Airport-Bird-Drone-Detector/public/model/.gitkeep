@@ -1,0 +1,4 @@
+# Place TF.js model files here after running the Colab notebook.
+# Expected files:
+#   model.json
+#   group1-shard1of1.bin  (name may vary based on model size)

@@ -1,0 +1,33 @@
+# ── Dependencies ─────────────────────────────────────────────────────────────
+/node_modules/
+
+# ── Next.js build output ──────────────────────────────────────────────────────
+/.next/
+/out/
+
+# ── TypeScript ────────────────────────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Environment variables ─────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+*.DS_Store
+
+# ── ML model weight shards (binary, large — generate from Colab) ──────────────
+public/model/*.bin
+
+# ── Video files (binary, generated — generate from Colab) ────────────────────
+public/video/*.mp4
+
+# ── Jupyter notebook checkpoints (auto-saved by Colab) ───────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ── Python cache (if running Colab notebooks locally) ────────────────────────
+__pycache__/
+*.pyc
