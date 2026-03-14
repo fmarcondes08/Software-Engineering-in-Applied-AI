@@ -1,0 +1,12 @@
+{
+  "name": "rag-document-chat",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "infra:up": "docker-compose up -d --wait",
+    "infra:down": "docker-compose down --volumes",
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev"
+  }
+}

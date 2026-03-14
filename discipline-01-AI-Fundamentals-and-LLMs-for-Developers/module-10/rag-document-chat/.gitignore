@@ -1,0 +1,12 @@
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+backend/uploads/*
+!backend/uploads/.gitkeep
+neo4j/data/
+neo4j/logs/
+neo4j/plugins/
+.env
+dist/
+frontend/dist/
+*.local
