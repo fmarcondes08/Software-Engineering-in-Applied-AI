@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurante IA Devs — Reservas por Voz</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 24px;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* ── Mic button ── */
+    #mic-btn {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1e1e1e;
+      box-shadow: 0 0 0 4px #333;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+      user-select: none;
+      outline: none;
+    }
+
+    #mic-btn:hover { background: #2a2a2a; }
+    #mic-btn:active { transform: scale(0.96); }
+
+    #mic-btn.recording {
+      background: #c0392b;
+      box-shadow: 0 0 0 6px rgba(192, 57, 43, 0.35);
+      animation: pulse 1.2s infinite;
+    }
+
+    #mic-btn.processing {
+      background: #555;
+      cursor: not-allowed;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 6px rgba(192, 57, 43, 0.35); }
+      50%  { box-shadow: 0 0 0 14px rgba(192, 57, 43, 0.1); }
+      100% { box-shadow: 0 0 0 6px rgba(192, 57, 43, 0.35); }
+    }
+
+    /* ── Status label ── */
+    #status {
+      font-size: 0.85rem;
+      color: #777;
+      text-align: center;
+      min-height: 20px;
+      transition: color 0.2s;
+    }
+
+    #status.recording { color: #e74c3c; font-weight: 600; }
+    #status.processing { color: #f39c12; }
+    #status.success { color: #2ecc71; }
+    #status.error { color: #e74c3c; }
+
+    /* ── Result card ── */
+    #result {
+      width: 100%;
+      max-width: 560px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    #transcript-card .card-text { color: #aaa; font-style: italic; }
+    #response-card { border-color: #2d4a2d; background: #141f14; }
+    #response-card .card-text { color: #c8e6c9; }
+
+    /* ── History ── */
+    #history {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-item {
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+    }
+
+    .history-item .hi-user { color: #888; margin-bottom: 4px; }
+    .history-item .hi-bot  { color: #a5d6a7; }
+
+    /* ── Footer ── */
+    footer {
+      font-size: 0.75rem;
+      color: #444;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🍽️ Restaurante IA Devs</h1>
+    <p>Fale para reservar ou cancelar sua mesa</p>
+  </header>
+
+  <button id="mic-btn" title="Clique para começar a gravar">🎙️</button>
+
+  <p id="status">Clique no microfone e fale</p>
+
+  <div id="result">
+    <div class="card" id="transcript-card">
+      <div class="card-label">Você disse</div>
+      <div class="card-text" id="transcript-text"></div>
+    </div>
+    <div class="card" id="response-card">
+      <div class="card-label">Assistente</div>
+      <div class="card-text" id="response-text"></div>
+    </div>
+  </div>
+
+  <div id="history"></div>
+
+  <footer>Powered by OpenAI Whisper + LangGraph</footer>
+
+  <script>
+    const btn       = document.getElementById('mic-btn');
+    const statusEl  = document.getElementById('status');
+    const resultEl  = document.getElementById('result');
+    const transcriptEl = document.getElementById('transcript-text');
+    const responseEl   = document.getElementById('response-text');
+    const historyEl    = document.getElementById('history');
+
+    let mediaRecorder = null;
+    let audioChunks   = [];
+    let isRecording   = false;
+
+    // ── Set state ──────────────────────────────────────────────
+    function setState(state, message) {
+      statusEl.className = state;
+      statusEl.textContent = message;
+      btn.className = state === 'recording' ? 'recording'
+                    : state === 'processing' ? 'processing'
+                    : '';
+      btn.textContent = state === 'recording' ? '⏹️'
+                      : state === 'processing' ? '⏳'
+                      : '🎙️';
+      btn.disabled = state === 'processing';
+    }
+
+    // ── Send audio to /chat/voice ──────────────────────────────
+    async function sendAudio(blob) {
+      setState('processing', 'Transcrevendo e processando...');
+
+      const formData = new FormData();
+      formData.append('file', blob, 'recording.webm');
+
+      try {
+        const res = await fetch('/chat/voice', { method: 'POST', body: formData });
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({ error: 'Erro desconhecido' }));
+          throw new Error(err.error || `HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        // Use assistantMessage extracted by the backend before serialization
+        const replyText = data.assistantMessage || '(sem resposta)';
+
+        // Render result
+        transcriptEl.textContent = data.transcribedText ?? '(não transcrito)';
+        responseEl.textContent   = replyText;
+        resultEl.style.display   = 'flex';
+
+        // Add to history
+        addHistory(data.transcribedText, replyText);
+
+        setState('success', 'Pronto! Clique para falar novamente');
+
+      } catch (err) {
+        console.error(err);
+        setState('error', `Erro: ${err.message}`);
+      }
+    }
+
+    // ── History ───────────────────────────────────────────────
+    function addHistory(userText, botText) {
+      const item = document.createElement('div');
+      item.className = 'history-item';
+      item.innerHTML = `
+        <div class="hi-user">🎙️ ${escapeHtml(userText)}</div>
+        <div class="hi-bot">🤖 ${escapeHtml(botText)}</div>
+      `;
+      historyEl.prepend(item);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // ── Mic button click ──────────────────────────────────────
+    btn.addEventListener('click', async () => {
+      if (isRecording) {
+        // Stop recording
+        mediaRecorder.stop();
+        isRecording = false;
+        return;
+      }
+
+      // Start recording
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioChunks = [];
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+
+        mediaRecorder.ondataavailable = e => {
+          if (e.data.size > 0) audioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          stream.getTracks().forEach(t => t.stop());
+          const blob = new Blob(audioChunks, { type: 'audio/webm' });
+          sendAudio(blob);
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+        setState('recording', 'Gravando... clique para parar');
+
+      } catch (err) {
+        setState('error', 'Não foi possível acessar o microfone. Verifique as permissões.');
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

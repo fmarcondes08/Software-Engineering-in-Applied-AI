@@ -1,0 +1,7 @@
+{
+  "node_version": "20",
+  "graphs": {
+    "restaurant_booking": "./src/graph/factory.ts:graph"
+  },
+  "env": ".env"
+}
