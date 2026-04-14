@@ -1,0 +1,38 @@
+{
+  "name": "healthmind-ai-backend",
+  "version": "1.0.0",
+  "description": "HealthMind AI - Intelligent Healthcare Navigator Backend",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node --env-file .env src/index.ts",
+    "dev": "lsof -ti:3001 | xargs kill -9 2>/dev/null; node --watch --inspect --env-file .env src/index.ts",
+    "seed": "node --env-file .env scripts/seed-neo4j.ts",
+    "docker:up": "docker compose up -d --wait",
+    "docker:down": "docker compose down"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/multipart": "^9.0.3",
+    "@langchain/community": "^1.1.17",
+    "@langchain/core": "^1.1.27",
+    "@langchain/langgraph": "^1.1.4",
+    "@langchain/langgraph-checkpoint-sqlite": "^1.0.1",
+    "@langchain/openai": "^1.2.9",
+    "better-sqlite3": "^11.10.0",
+    "fastify": "^5.7.4",
+    "langchain": "^1.2.25",
+    "neo4j-driver": "^5.28.0",
+    "pdf-parse": "^2.4.5",
+    "unpdf": "^1.6.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.4.0",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^24.10.12",
+    "@types/pdf-parse": "^1.1.5"
+  },
+  "engines": {
+    "node": ">=24.10.0"
+  }
+}
