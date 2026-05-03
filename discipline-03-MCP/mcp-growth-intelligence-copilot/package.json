@@ -1,0 +1,55 @@
+{
+  "name": "mcp-growth-intelligence-copilot",
+  "version": "0.1.0",
+  "description": "Full-stack MCP + LangGraph growth intelligence copilot with a React dashboard",
+  "type": "module",
+  "main": "src/backend/index.ts",
+  "bin": {
+    "growth-mcp": "./src/mcp/index.ts"
+  },
+  "files": [
+    "src/backend",
+    "src/mcp"
+  ],
+  "scripts": {
+    "api:dev": "node --watch --env-file .env src/backend/index.ts",
+    "api:start": "node --env-file .env src/backend/index.ts",
+    "langchain:mcp:smoke": "node --env-file .env scripts/langchain-mcp-smoke.ts",
+    "mcp:start": "node --env-file .env src/mcp/index.ts",
+    "mcp:inspect": "npx @modelcontextprotocol/inspector node --env-file .env src/mcp/index.ts",
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "test": "node --test test/**/*.test.ts",
+    "test:watch": "node --test --watch test/**/*.test.ts",
+    "registry:start": "docker compose up -d verdaccio",
+    "registry:stop": "docker compose down",
+    "release:private": "npm version patch && npm publish --registry http://localhost:4873"
+  },
+  "dependencies": {
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "@langchain/core": "^1.1.19",
+    "@langchain/langgraph": "^1.2.0",
+    "@langchain/mcp-adapters": "^1.1.3",
+    "@langchain/openai": "^1.2.5",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "@vitejs/plugin-react": "^5.1.1",
+    "csvtojson": "^2.0.14",
+    "fastify": "^5.7.4",
+    "langchain": "^1.2.17",
+    "mongodb": "^7.0.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "serpapi": "^2.2.1",
+    "vite": "^7.2.7",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.12",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

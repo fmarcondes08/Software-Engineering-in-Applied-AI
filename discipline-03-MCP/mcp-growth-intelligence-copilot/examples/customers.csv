@@ -1,0 +1,4 @@
+name,phone,email,segment,interests
+Customer One,+1 555-0201,customer.one@example.com,Developer Tools,"testing; automation"
+Customer Two,+1 555-0202,customer.two@example.com,AI Education,"software engineering; mcp"
+Customer Three,+1 555-0203,customer.three@example.com,Startup Founder,"growth; ai; outreach"

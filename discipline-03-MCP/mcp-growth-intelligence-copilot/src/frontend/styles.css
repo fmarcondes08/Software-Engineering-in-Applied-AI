@@ -1,0 +1,311 @@
+:root {
+  color: #202124;
+  background: #f4f6f8;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 6px;
+  background: #176b5d;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 40px;
+  padding: 0 14px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+input,
+textarea {
+  border: 1px solid #c8d0d8;
+  border-radius: 6px;
+  color: #202124;
+  outline: none;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+input[type="file"] {
+  background: #f7f9fb;
+  cursor: pointer;
+}
+
+textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+.login-shell {
+  align-items: center;
+  background: linear-gradient(135deg, #f4f6f8 0%, #e5edf2 100%);
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-panel {
+  background: white;
+  border: 1px solid #d8e0e6;
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgb(20 34 45 / 12%);
+  display: grid;
+  gap: 18px;
+  max-width: 420px;
+  padding: 28px;
+  width: 100%;
+}
+
+.eyebrow {
+  color: #6b7280;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.error {
+  color: #a83232;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+aside {
+  background: #1f2933;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 24px;
+}
+
+aside .eyebrow,
+.session-box span {
+  color: #aeb8c2;
+}
+
+nav {
+  display: grid;
+  gap: 8px;
+}
+
+nav a {
+  border-radius: 6px;
+  color: white;
+  padding: 10px 12px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background: #314252;
+}
+
+.session-box {
+  border-top: 1px solid #3d4d5d;
+  display: grid;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid #607080;
+}
+
+main {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.topbar {
+  align-items: end;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.search {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(220px, 320px) auto;
+}
+
+.notice {
+  background: #eaf7f3;
+  border: 1px solid #b9ddd2;
+  border-radius: 6px;
+  color: #15584c;
+  padding: 12px 14px;
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.panel {
+  background: white;
+  border: 1px solid #d8e0e6;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  min-height: 240px;
+  padding: 18px;
+}
+
+.wide {
+  grid-column: span 2;
+}
+
+.panel-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-header span {
+  background: #eef2f6;
+  border-radius: 999px;
+  color: #4b5563;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 4px 10px;
+}
+
+.chat-form {
+  display: grid;
+  gap: 12px;
+}
+
+.customer-list {
+  display: grid;
+  gap: 8px;
+}
+
+.row-button {
+  background: #f7f9fb;
+  border: 1px solid #dde5ec;
+  color: #202124;
+  display: grid;
+  gap: 4px;
+  height: auto;
+  justify-items: start;
+  min-height: 56px;
+  padding: 10px 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.row-button span {
+  color: #64707d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.row-button.selected {
+  border-color: #176b5d;
+  box-shadow: inset 3px 0 0 #176b5d;
+}
+
+.detail {
+  display: grid;
+  gap: 10px;
+}
+
+.timeline {
+  background: #f7f9fb;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.file-picker {
+  display: grid;
+  gap: 8px;
+}
+
+.file-picker span {
+  color: #4b5563;
+  font-weight: 800;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+.report {
+  display: grid;
+  gap: 12px;
+}
+
+.report article {
+  background: #f7f9fb;
+  border-left: 3px solid #176b5d;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+pre {
+  background: #1f2933;
+  border-radius: 6px;
+  color: #f8fafc;
+  max-height: 280px;
+  overflow: auto;
+  padding: 12px;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  aside {
+    position: static;
+  }
+
+  .topbar,
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .wide {
+    grid-column: span 1;
+  }
+}
